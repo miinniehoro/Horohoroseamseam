@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>เสี่ยงเซียมซี ศาลเจ้าแม่ทับทิม</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&display=swap');
 
         body {
             margin: 0;
@@ -19,35 +19,39 @@
             align-items: center;
             min-height: 100vh;
             text-align: center;
+            overflow: hidden; /* ป้องกันสกรอลล์ที่พื้นหลัง */
         }
 
         .container {
             background-color: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 20px;
-            border: 4px solid #FFD700;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-            max-width: 90%;
-            width: 400px;
+            border: 3px solid #FFD700;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+            width: 90%;
+            max-width: 380px;
         }
 
         h1 {
             color: #FFD700;
+            font-size: 1.8rem;
             text-shadow: 2px 2px 4px #000;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+            margin-top: 0;
         }
 
         .siamsi-tube {
-            width: 150px;
-            height: 250px;
+            width: 120px;
+            height: 200px;
             background: linear-gradient(90deg, #d35400, #e67e22, #d35400);
             border-radius: 10px;
-            margin: 0 auto 30px;
+            margin: 20px auto;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            border: 5px solid #5d4037;
+            border: 4px solid #5d4037;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
         }
 
         .stick-bundle {
@@ -57,14 +61,14 @@
         }
         
         .stick {
-            width: 10px;
-            height: 180px;
+            width: 8px;
+            height: 150px;
             background-color: #f5cba7;
             position: absolute;
             bottom: 0;
             left: 50%;
             transform-origin: bottom center;
-            border-radius: 5px 5px 0 0;
+            border-radius: 4px 4px 0 0;
             border: 1px solid #d35400;
         }
 
@@ -72,13 +76,14 @@
             background-color: #FFD700;
             color: #8B0000;
             border: none;
-            padding: 15px 40px;
-            font-size: 1.5rem;
+            padding: 12px 35px;
+            font-size: 1.3rem;
             font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
         }
 
         .shake-btn:hover {
@@ -109,6 +114,7 @@
             animation-iteration-count: 3;
         }
 
+        /* --- ปรับแต่ง Modal ใหม่ ให้สวยงาม --- */
         .modal {
             display: none;
             position: fixed;
@@ -117,55 +123,84 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.8);
+            background-color: rgba(0,0,0,0.85); /* พื้นหลังมืดลง */
             justify-content: center;
             align-items: center;
+            backdrop-filter: blur(3px);
         }
 
         .modal-content {
-            background-color: #fffaf0;
-            color: #333;
-            padding: 30px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            border: 8px solid #b22222;
+            background-color: #fffaf0; /* สีครีมอ่อน */
+            color: #4a3b32;
+            padding: 25px;
+            border-radius: 8px;
+            width: 85%;
+            max-width: 420px;
+            border: 6px double #b22222; /* ขอบคู่แบบจีน */
             text-align: center;
             position: relative;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
-            max-height: 80vh;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.2);
+            max-height: 85vh;
             overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .modal-number {
-            font-size: 3rem;
+            font-size: 1.8rem;
             color: #b22222;
             font-weight: bold;
-            margin-bottom: 10px;
-            border-bottom: 2px solid #ddd;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e0c097;
             padding-bottom: 10px;
+            width: 100%;
+        }
+
+        /* กล่องข้อความคำทำนาย */
+        .paper-slip {
+            background-color: #fff;
+            padding: 15px;
+            border: 1px dashed #b22222; /* เส้นประเหมือนรอยฉีก */
+            border-radius: 5px;
+            margin-bottom: 20px;
+            width: 90%;
         }
 
         .modal-text {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            white-space: pre-wrap;
-            text-align: left;
+            font-size: 0.95rem; /* ขนาดตัวอักษรเล็กลง */
+            line-height: 1.6; /* ระยะห่างบรรทัด */
+            white-space: pre-wrap; /* รักษารูปแบบการขึ้นบรรทัด */
+            text-align: center; /* จัดกึ่งกลาง */
+            font-weight: 400;
         }
 
         .close-btn {
             background-color: #b22222;
             color: white;
-            padding: 10px 20px;
+            padding: 8px 25px;
             border: none;
-            border-radius: 5px;
+            border-radius: 50px;
             cursor: pointer;
             font-size: 1rem;
+            transition: background 0.3s;
         }
         
         .close-btn:hover {
             background-color: #8b0000;
+        }
+
+        /* Scrollbar สวยๆ */
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+            border-radius: 4px;
+        }
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #d35400; 
+            border-radius: 4px;
         }
 
     </style>
@@ -174,31 +209,36 @@
 
     <div class="container">
         <h1>ศาลเจ้าแม่ทับทิม</h1>
-        <p style="color: #ffd700; margin-bottom: 20px;">ตั้งจิตอธิษฐาน แล้วกดปุ่มเขย่า</p>
+        <p style="color: #ffd700; margin-bottom: 15px; font-size: 0.9rem;">ตั้งจิตอธิษฐาน แล้วกดปุ่มเขย่า</p>
         
         <div class="siamsi-tube" id="tube">
             <div class="stick-bundle">
                 <div class="stick" style="transform: rotate(-10deg); left: 30%;"></div>
                 <div class="stick" style="transform: rotate(5deg); left: 45%;"></div>
                 <div class="stick" style="transform: rotate(15deg); left: 60%;"></div>
-                <div class="stick" style="transform: rotate(-5deg); left: 40%; height: 190px;"></div>
-                <div class="stick" style="transform: rotate(0deg); left: 50%; height: 170px;"></div>
+                <div class="stick" style="transform: rotate(-5deg); left: 40%; height: 140px;"></div>
+                <div class="stick" style="transform: rotate(0deg); left: 50%; height: 130px;"></div>
             </div>
         </div>
 
         <button class="shake-btn" onclick="startShake()">เขย่าเซียมซี</button>
     </div>
 
+    <!-- ส่วนแสดงผลคำทำนาย -->
     <div id="resultModal" class="modal">
         <div class="modal-content">
             <div id="resultNumber" class="modal-number">ใบที่ -</div>
-            <div id="resultText" class="modal-text">กำลังโหลดคำทำนาย...</div>
+            
+            <!-- สร้างกล่องกระดาษซ้อนข้างในอีกทีเพื่อความสวยงาม -->
+            <div class="paper-slip">
+                <div id="resultText" class="modal-text">กำลังโหลดคำทำนาย...</div>
+            </div>
+            
             <button class="close-btn" onclick="closeModal()">ปิดคำทำนาย</button>
         </div>
     </div>
 
     <script>
-        // ผมเปลี่ยนจากเครื่องหมาย " เป็น ` (Backtick) ให้แล้วครับ โค้ดจะรันผ่านแน่นอน
         const predictions = [
             `ใบที่ 1: ใบเซียมซี ที่ 1
 ใบที่หนึ่งสมมาตรปรารถนา ทายไว้ว่ามีคนชุบ
@@ -490,7 +530,6 @@
             const tube = document.getElementById('tube');
             tube.classList.add('shaking');
             
-            // รอ 1.5 วินาทีแล้วค่อยแสดงผล
             setTimeout(() => {
                 tube.classList.remove('shaking');
                 showResult();
@@ -498,13 +537,9 @@
         }
 
         function showResult() {
-            // สุ่ม 1-28
             const randomNumber = Math.floor(Math.random() * 28) + 1;
-            
-            // ดึงข้อความ
             const predictionText = predictions[randomNumber - 1];
 
-            // แสดงผล
             document.getElementById('resultNumber').innerText = "ใบที่ " + randomNumber;
             document.getElementById('resultText').innerText = predictionText;
             document.getElementById('resultModal').style.display = "flex";
